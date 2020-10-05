@@ -1,6 +1,6 @@
 let activePlayer = 'X';
 let selectedSquares = [];
-
+// player conditions
 function placeXOrO(squareNumber) {
     if (!selectedSquares.some(element => element.includes(squareNumber))) {
         let select = document.getElementById(squareNumber);
@@ -36,7 +36,7 @@ function placeXOrO(squareNumber) {
         }
     }
 }
-
+//Win conditions
 function checkWinConditions() {
     if (arrayIncludes('0X', '1X', '2X')) { drawWinLine(50, 100, 558, 100) }
     else if (arrayIncludes('3X', '4X', '5X')) { drawWinLine(50, 304, 558, 304) }
@@ -66,7 +66,7 @@ function checkWinConditions() {
         if (a === true && b === true && c === true) { return true; }
     }
 }
-
+//Game reset
 function resetGame() {
     for (let i = 0; i < 9; i++) {
         let square = document.getElementById(String(i));
@@ -79,7 +79,7 @@ function audio(audioURL) {
     let audio = new Audio(audioURL);
     audio.play();
 }
-
+//Line function
 function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
     const canvas = document.getElementById('win-lines');
     const c = canvas.getContext('2d');
@@ -110,7 +110,7 @@ function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
             if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
         }
     }
-
+//Animation Loop
     function clear() {
         const animationLoop = requestAnimationFrame(clear);
         c.clearRect(0, 0, 608, 608);
@@ -121,7 +121,7 @@ function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
     animateLineDrawing();
     setTimeout(function () { clear(); resetGame(); }, 1000);
 }
-
+//Pointer style
 function disableClick() {
     body.style.pointerEvents = 'none';
     setTimeout(function () { body.style.pointerEvents = 'auto'; }, 1000);
